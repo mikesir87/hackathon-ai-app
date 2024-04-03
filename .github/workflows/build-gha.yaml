@@ -29,4 +29,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: michaelirwin244/hackathon-ai-app:gha
+          tags: michaelirwin244/hackathon-ai-app:gha-${{ github.sha }}

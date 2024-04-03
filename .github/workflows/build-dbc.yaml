@@ -33,4 +33,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: michaelirwin244/hackathon-ai-app:dbc
+          tags: michaelirwin244/hackathon-ai-app:dbc-${{ github.sha }}
