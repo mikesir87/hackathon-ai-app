@@ -1,10 +1,12 @@
 import os
 import streamlit as st
 import json
+from langchain.chains import LLMChain
 from langchain.callbacks.base import BaseCallbackHandler
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAI
 from langchain.prompts import (
     ChatPromptTemplate,
+    PromptTemplate,
     HumanMessagePromptTemplate,
     SystemMessagePromptTemplate
 )
@@ -21,14 +23,36 @@ configFile.close()
 
 llm = ChatOpenAI(temperature=0, model_name="gpt-4", streaming=True)
 
-prompt = "You are a {adjective} {noun} that likes to {verb} {adverb}.".format(adjective=config["metadata"]["adjective"], noun=config["metadata"]["noun"], verb=config["metadata"]["verb"], adverb=config["metadata"]["adverb"])
+characterPromptTemplate = """
+You are a character generator that likes to generate characters that like to give advice and answer questions.
+Your character must align with the following characteristics:
+
+Quick description: {adjective} {noun}
+Favorite activity: {verb} {adverb}
+
+Create a short description about this character in 2-3 sentences.
+"""
+
+characterPrompt = PromptTemplate.from_template(characterPromptTemplate)
+
+blocking_llm = ChatOpenAI(temperature=0, model_name="gpt-4", streaming=False)
+llmchain_chat = LLMChain(llm=blocking_llm, prompt=characterPrompt)
+character = llmchain_chat.run({ "adjective": config["metadata"]["adjective"], "noun": config["metadata"]["noun"], "verb": config["metadata"]["verb"], "adverb": config["metadata"]["adverb"] })
+
+print (character)
 
 template = """
-{prompt}. You must answer the questions
-as this character, giving advice and answering questions as this character would.
+You are a chatbot that has the likeness of the following character:
+
+{character}
+
+You must also somehow reference your favorite color, which is {color}. Although that's a hex code value,
+feel free to turn it into a human understandable color.
+
+You must answer the questions as this character, giving advice and answering questions as this character would.
 If you do not know the answer, you are welcome to make up an answer that aligns with the character.
 But, you must make it clear that you are making up the answer.
-""".format(prompt=prompt)
+""".format(character=character, color=config["metadata"]["color"])
 
 system_message_prompt = SystemMessagePromptTemplate.from_template(template)
 human_template = "{question}"
@@ -92,6 +116,6 @@ def display_chat():
         with st.container():
             st.write("&nbsp;")
 
-st.text("Prompt: {prompt}".format(prompt=prompt))
+st.write("Character storyline: {prompt}".format(prompt=character))
 display_chat()
 chat_input()
