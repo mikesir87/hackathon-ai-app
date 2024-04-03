@@ -43,7 +43,7 @@ character = llmchain_chat.run({
     "noun": config["metadata"]["noun"], 
     "verb": config["metadata"]["verb"], 
     "adverb": config["metadata"]["adverb"],
-    "name": config["metadata"]["name"]
+    "name": config["name"]
 })
 
 print (character)
