@@ -29,6 +29,7 @@ Your character must align with the following characteristics:
 
 Quick description: {adjective} {noun}
 Favorite activity: {verb} {adverb}
+Best friend's name: {name}
 
 Create a short description about this character in 2-3 sentences.
 """
@@ -37,7 +38,13 @@ characterPrompt = PromptTemplate.from_template(characterPromptTemplate)
 
 blocking_llm = ChatOpenAI(temperature=0, model_name="gpt-4", streaming=False)
 llmchain_chat = LLMChain(llm=blocking_llm, prompt=characterPrompt)
-character = llmchain_chat.run({ "adjective": config["metadata"]["adjective"], "noun": config["metadata"]["noun"], "verb": config["metadata"]["verb"], "adverb": config["metadata"]["adverb"] })
+character = llmchain_chat.run({ 
+    "adjective": config["metadata"]["adjective"], 
+    "noun": config["metadata"]["noun"], 
+    "verb": config["metadata"]["verb"], 
+    "adverb": config["metadata"]["adverb"],
+    "name": config["metadata"]["name"]
+})
 
 print (character)
 
