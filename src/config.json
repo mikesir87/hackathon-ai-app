@@ -1,32 +1,10 @@
 {
-  "name": "elastic_hellman",
+  "name": "naughty_kepler",
   "metadata": {
     "noun": "pencil",
     "adjective": "sophisticated",
-    "verb": "walk",
-    "adverb": "carefully",
-    "color": {
-      "hsl": {
-        "h": 175.07462686567163,
-        "s": 0.6949152542372881,
-        "l": 0.381494,
-        "a": 1
-      },
-      "hex": "#1ea59a",
-      "rgb": {
-        "r": 30,
-        "g": 165,
-        "b": 154,
-        "a": 1
-      },
-      "hsv": {
-        "h": 175.07462686567163,
-        "s": 0.82,
-        "v": 0.6466,
-        "a": 1
-      },
-      "oldHue": 175.07462686567163,
-      "source": "hsv"
-    }
+    "verb": "swim",
+    "adverb": "easily",
+    "color": "#8b1111"
   }
 }
