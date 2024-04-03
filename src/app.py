@@ -10,6 +10,11 @@ from langchain.prompts import (
 )
 from typing import List, Any
 
+if "OPENAI_KEY_FILE" in os.environ:
+    with open(os.environ["OPENAI_KEY_FILE"], "r") as file:
+        key_content = file.read()
+    os.environ["OPENAI_API_KEY"] = key_content
+
 configFile = open(os.path.join(os.path.dirname(__file__), "config.json"))
 config = json.load(configFile)
 configFile.close()
