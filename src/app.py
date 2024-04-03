@@ -16,7 +16,7 @@ configFile.close()
 
 llm = ChatOpenAI(temperature=0, model_name="gpt-4", streaming=True)
 
-prompt = "You are a {adjective} {noun} that likes to {verb} {adverb}.".format(adjective=config["madLib"]["adjective"], noun=config["madLib"]["noun"], verb=config["madLib"]["verb"], adverb=config["madLib"]["adverb"])
+prompt = "You are a {adjective} {noun} that likes to {verb} {adverb}.".format(adjective=config["metadata"]["adjective"], noun=config["metadata"]["noun"], verb=config["metadata"]["verb"], adverb=config["metadata"]["adverb"])
 
 template = """
 {prompt}. You must answer the questions
