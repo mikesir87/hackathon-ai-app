@@ -25,7 +25,7 @@ jobs:
         with:
           version: "lab:latest"
           driver: cloud
-          endpoint: "docker/devrel"
+          endpoint: "pulumidockerdemo/my-cool-builder"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
@@ -33,4 +33,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: michaelirwin244/hackathon-ai-app:dbc-${{ github.sha }}
+          tags: pulumidockerdemo/hackathon-ai-app:dbc-${{ github.sha }}
