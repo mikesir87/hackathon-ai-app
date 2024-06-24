@@ -33,4 +33,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: pulumidockerdemo/madlib-personified-chatbot:dbc-${{ github.sha }}
+          tags: pulumidockerdemo/madlib-chatbot:dbc-${{ github.sha }}
